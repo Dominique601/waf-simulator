@@ -6,6 +6,12 @@ This project was created as a cybersecurity learning tool to demonstrate how a b
 
 ---
 
+## Dashboard Preview
+
+![WAF Simulator Dashboard](images/waf-dashboard.png)
+
+---
+
 ## Features
 
 - Analyze simulated HTTP request payloads
@@ -112,6 +118,9 @@ waf-simulator/
 |-- requirements.txt
 |-- README.md
 |-- .gitignore
+|
+|-- images/
+|   |-- waf-dashboard.png
 |
 |-- templates/
 |   |-- index.html
