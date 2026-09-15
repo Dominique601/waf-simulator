@@ -12,6 +12,43 @@ This project was created as a cybersecurity learning tool to demonstrate how a b
 
 ---
 
+## Skills Demonstrated
+
+### Cybersecurity
+- Web Application Firewall fundamentals
+- HTTP request inspection
+- Signature-based threat detection
+- SQL injection detection
+- Cross-Site Scripting (XSS) detection
+- Command injection detection
+- Path traversal detection
+- Sensitive file access detection
+- Threat classification
+- Severity-based alerting
+- Security event logging
+
+### Development
+- Python
+- Flask
+- HTML
+- CSS
+- Jinja2 templating
+- Regular expressions
+- JSON data storage
+- File handling
+- Application debugging
+
+### Tools & Workflow
+- Git
+- GitHub
+- Command-line interface
+- Python virtual environments
+- Version control
+- Repository documentation
+- Incremental application development
+
+---
+
 ## Features
 
 - Analyze simulated HTTP request payloads
@@ -224,26 +261,6 @@ Status: BLOCKED
 Threat Type: Command Injection
 Severity: CRITICAL
 ```
-
----
-
-## Security Concepts Demonstrated
-
-This project demonstrates:
-
-- Web Application Firewall fundamentals
-- HTTP request inspection
-- Signature-based threat detection
-- Regular-expression pattern matching
-- SQL injection detection
-- Cross-Site Scripting detection
-- Command injection detection
-- Path traversal detection
-- Sensitive file access detection
-- Security event logging
-- Threat classification
-- Severity-based alerting
-- Git version control
 
 ---
 
