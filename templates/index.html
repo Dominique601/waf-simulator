@@ -85,14 +85,25 @@
 
             <p>
                 <strong>Status:</strong>
-                <span class="blocked">
-                    BLOCKED
-                </span>
+                <span class="blocked">BLOCKED</span>
             </p>
 
             <p>
                 <strong>Threat Type:</strong>
                 {{ result.attack }}
+            </p>
+
+            <p>
+                <strong>Severity:</strong>
+
+                <span class="severity {{ result.severity | lower }}">
+                    {{ result.severity }}
+                </span>
+            </p>
+
+            <p>
+                <strong>Analysis:</strong>
+                {{ result.description }}
             </p>
 
         </div>
@@ -105,9 +116,7 @@
 
             <p>
                 <strong>Status:</strong>
-                <span class="allowed">
-                    ALLOWED
-                </span>
+                <span class="allowed">ALLOWED</span>
             </p>
 
             <p>
@@ -136,6 +145,7 @@
                         <th>Payload</th>
                         <th>Status</th>
                         <th>Threat</th>
+                        <th>Severity</th>
                     </tr>
                 </thead>
 
@@ -150,24 +160,22 @@
                         </td>
 
                         <td>
-                            <code>
-                                {{ entry.payload }}
-                            </code>
+                            <code>{{ entry.payload }}</code>
                         </td>
 
                         <td>
 
                             {% if entry.status == "BLOCKED" %}
 
-                                <span class="blocked">
-                                    BLOCKED
-                                </span>
+                            <span class="blocked">
+                                BLOCKED
+                            </span>
 
                             {% else %}
 
-                                <span class="allowed">
-                                    ALLOWED
-                                </span>
+                            <span class="allowed">
+                                ALLOWED
+                            </span>
 
                             {% endif %}
 
@@ -175,6 +183,26 @@
 
                         <td>
                             {{ entry.attack }}
+                        </td>
+
+                        <td>
+
+                            {% set severity = entry.severity | default('NONE') %}
+
+                            {% if severity != "NONE" %}
+
+                            <span class="severity {{ severity | lower }}">
+                                {{ severity }}
+                            </span>
+
+                            {% else %}
+
+                            <span class="subtitle">
+                                NONE
+                            </span>
+
+                            {% endif %}
+
                         </td>
 
                     </tr>
@@ -189,9 +217,9 @@
 
         {% else %}
 
-            <p class="subtitle">
-                No requests have been analyzed yet.
-            </p>
+        <p class="subtitle">
+            No requests have been analyzed yet.
+        </p>
 
         {% endif %}
 

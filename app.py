@@ -43,10 +43,10 @@ def home():
             "payload": submitted_request,
             "status": result["status"],
             "attack": result["attack"] or "None",
+            "severity": result["severity"],
         }
 
         request_history.insert(0, entry)
-
         save_history(request_history)
 
     total_requests = len(request_history)
