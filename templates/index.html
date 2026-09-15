@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>WAF Simulator</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ url_for('static', filename='style.css') }}"
+    >
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>Web Application Firewall Simulator</h1>
+
+        <p class="subtitle">
+            Analyze simulated HTTP requests for suspicious or malicious patterns.
+        </p>
+    </div>
+
+    <div class="status-card">
+        <strong>WAF Status:</strong>
+        <span class="status-active">ACTIVE</span>
+    </div>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <h3>Total Requests</h3>
+            <p>{{ total_requests }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Allowed</h3>
+            <p class="allowed">{{ allowed_requests }}</p>
+        </div>
+
+        <div class="stat-card">
+            <h3>Blocked</h3>
+            <p class="blocked">{{ blocked_requests }}</p>
+        </div>
+
+    </div>
+
+    <div class="panel">
+
+        <h2>Request Analyzer</h2>
+
+        <form method="POST">
+
+            <label for="request_data">
+                Request Payload
+            </label>
+
+            <br><br>
+
+            <textarea
+                id="request_data"
+                name="request_data"
+                rows="9"
+                placeholder="Enter an HTTP request or payload..."
+            >{{ submitted_request }}</textarea>
+
+            <button type="submit">
+                Analyze Request
+            </button>
+
+        </form>
+
+    </div>
+
+    {% if result %}
+
+        {% if result.status == "BLOCKED" %}
+
+        <div class="panel result-blocked">
+
+            <h2>Threat Detected</h2>
+
+            <p>
+                <strong>Status:</strong>
+                <span class="blocked">
+                    BLOCKED
+                </span>
+            </p>
+
+            <p>
+                <strong>Threat Type:</strong>
+                {{ result.attack }}
+            </p>
+
+        </div>
+
+        {% else %}
+
+        <div class="panel result-allowed">
+
+            <h2>Request Analysis</h2>
+
+            <p>
+                <strong>Status:</strong>
+                <span class="allowed">
+                    ALLOWED
+                </span>
+            </p>
+
+            <p>
+                No malicious pattern was detected.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    {% endif %}
+
+    <div class="panel">
+
+        <h2>Recent Activity</h2>
+
+        {% if request_history %}
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>Timestamp</th>
+                        <th>Payload</th>
+                        <th>Status</th>
+                        <th>Threat</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for entry in request_history %}
+
+                    <tr>
+
+                        <td>
+                            {{ entry.timestamp }}
+                        </td>
+
+                        <td>
+                            <code>
+                                {{ entry.payload }}
+                            </code>
+                        </td>
+
+                        <td>
+
+                            {% if entry.status == "BLOCKED" %}
+
+                                <span class="blocked">
+                                    BLOCKED
+                                </span>
+
+                            {% else %}
+
+                                <span class="allowed">
+                                    ALLOWED
+                                </span>
+
+                            {% endif %}
+
+                        </td>
+
+                        <td>
+                            {{ entry.attack }}
+                        </td>
+
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+            <p class="subtitle">
+                No requests have been analyzed yet.
+            </p>
+
+        {% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>
